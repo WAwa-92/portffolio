@@ -1,0 +1,30 @@
+$bg: #0f172a;
+$panel: #111827;
+$text: #e5e7eb;
+$muted: #9ca3af;
+$primary: #38bdf8;
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: $bg;
+    color: $text;
+}
+
+.container {
+    width: min(100% - 2rem, 1100px);
+    margin-inline: auto;
+}
+
+.project-list {
+    display: grid;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.muted {
+    color: $muted;
+}

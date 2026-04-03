@@ -1,0 +1,135 @@
+:root {
+    --bg: #0f172a;
+    --panel: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --primary: #38bdf8;
+    --danger: #f87171;
+    --success: #34d399;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+a {
+    color: var(--primary);
+}
+
+.container {
+    width: min(100% - 2rem, 1100px);
+    margin-inline: auto;
+}
+
+.site-header {
+    background: #020617;
+    border-bottom: 1px solid #1f2937;
+    margin-bottom: 2rem;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.menu {
+    display: flex;
+    gap: 1rem;
+}
+
+.hero,
+.skills,
+.projects,
+.auth-card,
+.project-detail,
+.stat-card {
+    background: var(--panel);
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.project-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    background: var(--primary);
+    border: 0;
+    color: #082f49;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #0b1220;
+    color: var(--text);
+}
+
+.flash {
+    padding: 0.7rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.flash-error {
+    background: rgba(248, 113, 113, 0.2);
+    border: 1px solid var(--danger);
+}
+
+.flash-success {
+    background: rgba(52, 211, 153, 0.2);
+    border: 1px solid var(--success);
+}
+
+.stats-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.image-grid img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+@media (min-width: 768px) {
+    .project-list,
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
