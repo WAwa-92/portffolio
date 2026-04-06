@@ -30,4 +30,33 @@ class Category extends Model
 
         return $stmt->fetchAll();
     }
+
+    public function create(string $name): bool
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO categories (name) VALUES (:name)');
+        return $stmt->execute(['name' => $name]);
+    }
+
+    public function update(int $id, string $name): bool
+    {
+        $stmt = $this->pdo->prepare('UPDATE categories SET name = :name WHERE id = :id');
+        return $stmt->execute([
+            'id' => $id,
+            'name' => $name,
+        ]);
+    }
+
+    public function delete(int $id): bool
+    {
+        $stmt = $this->pdo->prepare('DELETE FROM categories WHERE id = :id');
+        return $stmt->execute(['id' => $id]);
+    }
+
+    public function hasProjects(int $id): bool
+    {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM projects WHERE category_id = :id');
+        $stmt->execute(['id' => $id]);
+
+        return (int) $stmt->fetchColumn() > 0;
+    }
 }

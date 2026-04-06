@@ -80,80 +80,63 @@ INSERT INTO skills (name, level, user_id) VALUES
 
 INSERT INTO projects (title, slug, summary, content, category_id, user_id) VALUES
 (
-    'Maquette 3W Academy',
-    'maquette-3w-academy',
-    'Intégration d\'une maquette responsive mobile-first.',
-    '<p>Projet d\'intégration HTML / SCSS avec une approche mobile-first et un découpage des composants.</p>',
-    1,
-    1
-),
-(
-    'Mini API PHP',
-    'mini-api-php',
-    'API simple en PHP orienté objet avec PDO.',
-    '<p>API en PHP orienté objet avec architecture MVC, routes et sécurisation des entrées utilisateur.</p>',
+    'Akinator en PHP',
+    'akinator-php',
+    'Jeu de devinettes de fruits avec authentification et historique des parties.',
+    '<p>Projet PHP/MySQL inspiré d\'Akinator : l\'utilisateur se connecte, lance une partie et répond à des questions pour que l\'application devine le fruit. Le projet inclut inscription/connexion, sessions, historique des parties, et requêtes préparées PDO.</p>',
     2,
     1
 ),
 (
-    'React UI Showcase',
-    'react-ui-showcase',
-    'Interface frontend réalisée avec React.',
-    '<p>Création d\'une interface avec composants réutilisables, état local et affichage conditionnel.</p>',
+    'Pacman en JavaScript',
+    'pacman-javascript',
+    'Mini jeu d\'arcade en JavaScript orienté logique de grille et déplacements.',
+    '<p>Jeu Pacman réalisé en JavaScript vanilla sur canvas : labyrinthe par grille, déplacements au clavier (flèches + ZQSD), score, et fantômes en POO avec mouvement autonome. L\'objectif était de travailler la boucle de jeu, la logique de collisions et la structure modulaire du code.</p>',
     1,
     1
 ),
 (
-    'Portfolio Fullstack',
-    'portfolio-fullstack',
-    'Portfolio complet avec dashboard administrateur.',
-    '<p>Projet fullstack PHP/MySQL avec une administration des projets, catégories, compétences, tags et images.</p>',
+    'Jeu Memory',
+    'jeu-memory',
+    'Jeu de mémoire avec paires de cartes, verrouillage d\'actions et redémarrage.',
+    '<p>Jeu Memory en JavaScript : les cartes sont mélangées aléatoirement, le joueur retourne 2 cartes, et le script vérifie la paire. La logique gère un verrou pendant la comparaison, une temporisation sur erreur et un bouton de redémarrage.</p>',
+    1,
+    1
+),
+(
+    'Anonyme Tchat en MVC PHP',
+    'anonyme-tchat-mvc-php',
+    'Application de chat anonyme avec salons et messages, construite en MVC.',
+    '<p>Application MVC en PHP orienté objet : création de salons, envoi de messages, affichage des messages par salon et possibilité d\'épingler un message. Le routeur interne redirige vers un contrôleur dédié et les managers gèrent les accès base de données.</p>',
     3,
-    1
-),
-(
-    'Veille Git & Workflow',
-    'veille-git-workflow',
-    'Projet de veille sur les bonnes pratiques Git.',
-    '<p>Organisation du travail avec branches, pull requests et conventions de commit.</p>',
-    2,
-    1
-),
-(
-    'Site vitrine LDLC (inspiration)',
-    'site-vitrine-ldlc',
-    'Reproduction d\'une partie de l\'ergonomie d\'un site e-commerce.',
-    '<p>Travail sur la hiérarchie visuelle, les composants de cartes produits et l\'adaptation responsive.</p>',
-    4,
     1
 );
 
 INSERT INTO tags (name, project_id) VALUES
-('HTML', 1),
-('SCSS', 1),
-('Responsive', 1),
-('PHP', 2),
-('PDO', 2),
-('MVC', 2),
-('React', 3),
-('Components', 3),
-('State', 3),
+('PHP', 1),
+('MySQL', 1),
+('Auth', 1),
+('Session', 1),
+('Quiz', 1),
+('JavaScript', 2),
+('Arcade', 2),
+('Logique de jeu', 2),
+('Événements clavier', 2),
+('JavaScript', 3),
+('DOM', 3),
+('Algorithmie', 3),
+('Game loop', 3),
+('Canvas', 2),
+('MVC', 4),
 ('PHP', 4),
-('MySQL', 4),
-('Admin', 4),
-('Git', 5),
-('Branching', 5),
-('Workflow', 5),
-('UX', 6),
-('E-commerce', 6),
-('Responsive', 6);
+('POO', 4),
+('Router', 4),
+('Messagerie', 4);
 
 INSERT INTO images (alt, picture, project_id) VALUES
-('Capture maquette 3W Academy', 'maquette-3w-academy.jpg', 1),
-('Capture mini API PHP', 'mini-api-php.jpg', 2),
-('Capture React UI Showcase', 'react-ui-showcase.jpg', 3),
-('Capture dashboard portfolio', 'portfolio-fullstack.jpg', 4),
-('Capture veille Git', 'veille-git-workflow.jpg', 5),
-('Capture site vitrine LDLC', 'site-vitrine-ldlc.jpg', 6);
+('Capture Akinator PHP', 'akinator-php.jpg', 1),
+('Capture Pacman JavaScript', 'pacman-javascript.jpg', 2),
+('Capture jeu Memory', 'jeu-memory.jpg', 3),
+('Capture Anonyme Tchat MVC PHP', 'anonyme-tchat-mvc-php.jpg', 4);
 
 -- Mot de passe de démonstration: password (à changer en production)

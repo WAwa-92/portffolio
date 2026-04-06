@@ -21,5 +21,6 @@
         </article>
     </div>
 
-    <p>Dans la partie 2, on fera les pages CRUD complètes.</p>
+    <p><a href="<?= e($this->config['app']['base_url']) ?>/admin/categories">Aller à la gestion des catégories</a></p>
+    <p><a href="<?= e($this->config['app']['base_url']) ?>/admin/profile">Modifier mon profil (éditeur riche)</a></p>
 </section>

@@ -11,6 +11,8 @@
         <nav class="container nav">
             <a href="<?= e($this->config['app']['base_url']) ?>/admin" class="logo">Dashboard</a>
             <div class="menu">
+                <a href="<?= e($this->config['app']['base_url']) ?>/admin/categories">Catégories</a>
+                <a href="<?= e($this->config['app']['base_url']) ?>/admin/profile">Mon profil</a>
                 <a href="<?= e($this->config['app']['base_url']) ?>/">Voir le site</a>
                 <a href="<?= e($this->config['app']['base_url']) ?>/logout">Déconnexion</a>
             </div>
