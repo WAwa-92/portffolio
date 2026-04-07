@@ -14,7 +14,7 @@ function rich(?string $value): string
     $allowedTags = '<p><br><strong><em><ul><ol><li><a>';
     $clean = strip_tags((string) $value, $allowedTags);
 
-    return preg_replace('/javascript:/i', '', $clean) ?? '';
+    return str_ireplace('javascript:', '', $clean);
 }
 
 function old(string $key, string $default = ''): string

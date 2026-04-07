@@ -24,21 +24,32 @@ final class Router
 
     public function dispatch(string $method, string $uri): void
     {
-        $path = parse_url($uri, PHP_URL_PATH) ?: '/';
-        $basePath = parse_url($this->config['app']['base_url'], PHP_URL_PATH) ?: '';
+        $path = parse_url($uri, PHP_URL_PATH);
+
+        if (!$path) {
+            $path = '/';
+        }
+
+        $basePath = parse_url($this->config['app']['base_url'], PHP_URL_PATH);
+
+        if (!$basePath) {
+            $basePath = '';
+        }
 
         if ($basePath !== '' && str_starts_with($path, $basePath)) {
             $path = substr($path, strlen($basePath));
-            $path = $path === '' ? '/' : $path;
+
+            if ($path === '') {
+                $path = '/';
+            }
         }
 
         $availableRoutes = $this->routes[strtoupper($method)] ?? [];
 
         foreach ($availableRoutes as $route) {
-            $pattern = preg_replace('#\{([a-zA-Z_][a-zA-Z0-9_]*)\}#', '(?P<$1>[^/]+)', $route['path']);
-            $pattern = '#^' . $pattern . '$#';
+            $params = $this->matchRoute($route['path'], $path);
 
-            if (!preg_match($pattern, $path, $matches)) {
+            if ($params === false) {
                 continue;
             }
 
@@ -51,8 +62,7 @@ final class Router
             [$controllerClass, $action] = $route['handler'];
             $controller = new $controllerClass($this->config);
 
-            $params = array_filter($matches, static fn ($key): bool => !is_int($key), ARRAY_FILTER_USE_KEY);
-            $controller->{$action}(...array_values($params));
+            call_user_func_array([$controller, $action], $params);
 
             return;
         }
@@ -69,5 +79,40 @@ final class Router
             'handler' => $handler,
             'authRequired' => $authRequired,
         ];
+    }
+
+    private function matchRoute(string $routePath, string $currentPath): array|false
+    {
+        $routeParts = explode('/', trim($routePath, '/'));
+        $currentParts = explode('/', trim($currentPath, '/'));
+
+        if ($routePath === '/') {
+            $routeParts = [];
+        }
+
+        if ($currentPath === '/') {
+            $currentParts = [];
+        }
+
+        if (count($routeParts) !== count($currentParts)) {
+            return false;
+        }
+
+        $params = [];
+
+        foreach ($routeParts as $index => $routePart) {
+            $currentPart = $currentParts[$index];
+
+            if (str_starts_with($routePart, '{') && str_ends_with($routePart, '}')) {
+                $params[] = $currentPart;
+                continue;
+            }
+
+            if ($routePart !== $currentPart) {
+                return false;
+            }
+        }
+
+        return $params;
     }
 }

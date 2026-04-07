@@ -39,7 +39,7 @@ class CategoryController extends Controller
         $name = trim((string) ($_POST['name'] ?? ''));
         Session::set('_old_input', ['name' => $name]);
 
-        if ($name === '' || mb_strlen($name) > 50) {
+        if ($name === '' || strlen($name) > 50) {
             Session::flash('error', 'Le nom est obligatoire (max 50 caractères).');
             $this->redirect('/admin/categories/create');
         }
@@ -58,7 +58,7 @@ class CategoryController extends Controller
 
     public function edit(string $id): void
     {
-        if (!ctype_digit($id)) {
+        if (!is_numeric($id)) {
             Session::flash('error', 'Identifiant invalide.');
             $this->redirect('/admin/categories');
         }
@@ -80,14 +80,14 @@ class CategoryController extends Controller
 
     public function update(string $id): void
     {
-        if (!ctype_digit($id) || !$this->checkCsrf()) {
+        if (!is_numeric($id) || !$this->checkCsrf()) {
             Session::flash('error', 'Requête invalide.');
             $this->redirect('/admin/categories');
         }
 
         $name = trim((string) ($_POST['name'] ?? ''));
 
-        if ($name === '' || mb_strlen($name) > 50) {
+        if ($name === '' || strlen($name) > 50) {
             Session::flash('error', 'Le nom est obligatoire (max 50 caractères).');
             $this->redirect('/admin/categories/' . $id . '/edit');
         }
@@ -105,7 +105,7 @@ class CategoryController extends Controller
 
     public function delete(string $id): void
     {
-        if (!ctype_digit($id) || !$this->checkCsrf()) {
+        if (!is_numeric($id) || !$this->checkCsrf()) {
             Session::flash('error', 'Requête invalide.');
             $this->redirect('/admin/categories');
         }

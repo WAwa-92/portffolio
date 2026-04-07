@@ -17,19 +17,15 @@ final class Database
             return self::$pdo;
         }
 
-        $dsn = sprintf(
-            'mysql:host=%s;port=%s;dbname=%s;charset=%s',
-            $dbConfig['host'],
-            $dbConfig['port'],
-            $dbConfig['dbname'],
-            $dbConfig['charset']
-        );
+        $dsn = 'mysql:host=' . $dbConfig['host'];
+        $dsn .= ';port=' . $dbConfig['port'];
+        $dsn .= ';dbname=' . $dbConfig['dbname'];
+        $dsn .= ';charset=' . $dbConfig['charset'];
 
         try {
             self::$pdo = new PDO($dsn, $dbConfig['user'], $dbConfig['pass'], [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
             ]);
         } catch (PDOException $exception) {
             http_response_code(500);

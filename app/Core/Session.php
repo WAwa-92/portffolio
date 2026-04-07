@@ -44,7 +44,7 @@ final class Session
     public static function csrfToken(): string
     {
         if (!isset($_SESSION['_csrf_token'])) {
-            $_SESSION['_csrf_token'] = bin2hex(random_bytes(32));
+            $_SESSION['_csrf_token'] = bin2hex(random_bytes(16));
         }
 
         return $_SESSION['_csrf_token'];
@@ -52,8 +52,14 @@ final class Session
 
     public static function verifyCsrfToken(?string $token): bool
     {
-        return is_string($token)
-            && isset($_SESSION['_csrf_token'])
-            && hash_equals($_SESSION['_csrf_token'], $token);
+        if (!is_string($token)) {
+            return false;
+        }
+
+        if (!isset($_SESSION['_csrf_token'])) {
+            return false;
+        }
+
+        return hash_equals($_SESSION['_csrf_token'], $token);
     }
 }

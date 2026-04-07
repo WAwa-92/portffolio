@@ -56,7 +56,7 @@ class ProfileController extends Controller
         $githubUrl = trim((string) ($_POST['github_url'] ?? ''));
         $description = trim((string) ($_POST['description'] ?? ''));
 
-        if ($name === '' || mb_strlen($name) > 50) {
+        if ($name === '' || strlen($name) > 50) {
             Session::flash('error', 'Nom obligatoire (max 50 caractères).');
             $this->redirect('/admin/profile');
         }
