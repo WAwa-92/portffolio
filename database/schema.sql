@@ -57,26 +57,25 @@ CREATE TABLE images (
 
 INSERT INTO users (name, email, password, description, github_url)
 VALUES (
-    'Wawa',
+    'Wael Bakkay',
     'admin@portfolio.local',
     '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9lliS6JwlnQf5xvV9GfD2.',
-    '<p>Développeur web en formation à la 3W Academy.</p><p>Vous pouvez consulter mon profil <a href="https://github.com/WAwa-92" target="_blank" rel="noopener">GitHub</a>.</p>',
+    '<p>Élève en première année de Bachelor en Développement Informatique à la 3W Academy.</p><p>Passionné par le développement web et la programmation, j\'ai créé plusieurs projets en PHP, JavaScript et MySQL.</p><p>Vous pouvez consulter mon profil <a href="https://github.com/WAwa-92" target="_blank" rel="noopener">GitHub</a>.</p>',
     'https://github.com/WAwa-92'
 );
 
 INSERT INTO categories (name) VALUES
 ('Frontend'),
 ('Backend'),
-('Fullstack'),
-('CMS');
+('Fullstack');
 
 INSERT INTO skills (name, level, user_id) VALUES
-('HTML/CSS', 80, 1),
-('PHP', 70, 1),
-('JavaScript', 65, 1),
-('MySQL', 70, 1),
-('SCSS', 60, 1),
-('Git', 60, 1);
+('HTML/CSS', 85, 1),
+('PHP', 80, 1),
+('JavaScript', 75, 1),
+('MySQL', 80, 1),
+('SCSS', 75, 1),
+('Git', 70, 1);
 
 INSERT INTO projects (title, slug, summary, content, category_id, user_id) VALUES
 (
@@ -134,9 +133,9 @@ INSERT INTO tags (name, project_id) VALUES
 ('Messagerie', 4);
 
 INSERT INTO images (alt, picture, project_id) VALUES
-('Capture Akinator PHP', 'akinator-php.jpg', 1),
-('Capture Pacman JavaScript', 'pacman-javascript.jpg', 2),
-('Capture jeu Memory', 'jeu-memory.jpg', 3),
-('Capture Anonyme Tchat MVC PHP', 'anonyme-tchat-mvc-php.jpg', 4);
+('Capture Akinator PHP', 'akinator-php.png', 1),
+('Capture Pacman JavaScript', 'pacman-javascript.png', 2),
+('Capture jeu Memory', 'jeu-memory.png', 3),
+('Capture Anonyme Tchat MVC PHP', 'anonyme-tchat-mvc-php.png', 4);
 
 -- Mot de passe de démonstration: password (à changer en production)

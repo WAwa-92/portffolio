@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     public function show(string $id): void
     {
-        if (!ctype_digit($id)) {
+        if (!is_numeric($id)) {
             http_response_code(404);
             (new ErrorController($this->config))->notFound();
             return;

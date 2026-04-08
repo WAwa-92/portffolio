@@ -1,42 +1,29 @@
 <article class="project-detail">
+    <p class="muted"><?= e($project['category_name']) ?></p>
     <h1><?= e($project['title']) ?></h1>
-    <p class="muted">Catégorie : <?= e($project['category_name']) ?></p>
     <p><?= e($project['summary']) ?></p>
 
-    <section>
-        <h2>Contenu</h2>
-        <div>
-            <?= rich($project['content']) ?>
+    <?php if (!empty($images)): ?>
+        <div class="image-grid" style="margin: 1.5rem 0;">
+            <?php foreach ($images as $image): ?>
+                <figure>
+                    <img src="<?= e($this->config['app']['base_url']) ?>/images/<?= e($image['picture']) ?>" alt="<?= e($image['alt']) ?>">
+                </figure>
+            <?php endforeach; ?>
         </div>
-    </section>
+    <?php endif; ?>
 
-    <section>
-        <h2>Étiquettes</h2>
-        <?php if (empty($tags)): ?>
-            <p>Aucune étiquette.</p>
-        <?php else: ?>
-            <ul>
-                <?php foreach ($tags as $tag): ?>
-                    <li><?= e($tag['name']) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-    </section>
+    <h2>À propos</h2>
+    <div><?= rich($project['content']) ?></div>
 
-    <section>
-        <h2>Images</h2>
-        <?php if (empty($images)): ?>
-            <p>Aucune image.</p>
-        <?php else: ?>
-            <div class="image-grid">
-                <?php foreach ($images as $image): ?>
-                    <figure>
-                        <img src="<?= e($this->config['app']['base_url']) ?>/uploads/<?= e($image['picture']) ?>" alt="<?= e($image['alt']) ?>">
-                    </figure>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-    </section>
+    <?php if (!empty($tags)): ?>
+        <h2>Technologies</h2>
+        <ul>
+            <?php foreach ($tags as $tag): ?>
+                <li><?= e($tag['name']) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 
-    <p><a href="<?= e($this->config['app']['base_url']) ?>/">← Retour à l'accueil</a></p>
+    <p style="margin-top: 2rem;"><a href="<?= e($this->config['app']['base_url']) ?>/">← Retour aux projets</a></p>
 </article>

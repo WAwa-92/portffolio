@@ -1,30 +1,212 @@
-$bg: #0f172a;
-$panel: #111827;
-$text: #e5e7eb;
-$muted: #9ca3af;
-$primary: #38bdf8;
+// Variables
+$bg: #f6f7fb;
+$card: #ffffff;
+$text: #1f2937;
+$muted: #6b7280;
+$border: #e5e7eb;
+$primary: #2563eb;
+$danger: #dc2626;
+$success: #16a34a;
+$mobile: 768px;
+
+// Réinitialisation
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
 
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
     background: $bg;
     color: $text;
+    line-height: 1.5;
 }
 
+// Liens
+a {
+    color: $primary;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Layout
 .container {
     width: min(100% - 2rem, 1100px);
-    margin-inline: auto;
+    margin: 0 auto;
 }
 
-.project-list {
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid $border;
+    margin-bottom: 1.2rem;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+// Cartes
+.hero,
+.skills,
+.projects,
+.auth-card,
+.project-detail,
+.stat-card {
+    background: $card;
+    border: 1px solid $border;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+// Grilles
+.project-list,
+.stats-grid {
     display: grid;
     gap: 1rem;
 
-    @media (min-width: 768px) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media (min-width: $mobile) {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+// Boutons et inputs
+button,
+input {
+    font: inherit;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    background: $primary;
+    color: #fff;
+    padding: 0.55rem 0.9rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+input {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    background: #fff;
+    color: $text;
+}
+
+// Messages
+.flash {
+    border-radius: 8px;
+    padding: 0.65rem;
+    margin-bottom: 1rem;
+
+    &-error {
+        background: #fee2e2;
+        border: 1px solid #fecaca;
+        color: #7f1d1d;
+    }
+
+    &-success {
+        background: #dcfce7;
+        border: 1px solid #bbf7d0;
+        color: #14532d;
+    }
+}
+
+// Admin
+.admin-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid $border;
+
+    th,
+    td {
+        border-bottom: 1px solid $border;
+        padding: 0.7rem;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        form {
+            margin: 0;
+        }
+    }
+}
+
+.btn-danger {
+    background: $danger;
 }
 
 .muted {
     color: $muted;
+}
+
+// Images
+.image-grid img {
+    width: 100%;
+    max-width: 340px;
+    border-radius: 10px;
+    border: 1px solid $border;
+}
+
+// Footer
+.site-footer {
+    background: #fff;
+    border-top: 1px solid $border;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    text-align: center;
+    color: $muted;
+    font-size: 0.9rem;
+}
+
+// Responsive mobile-first
+@media (min-width: $mobile) {
+    .project-list,
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
