@@ -4,6 +4,9 @@
             <h1><?= e($user['name'] ?? 'Votre nom') ?></h1>
             <div class="hero-description"><?= rich($user['description'] ?? '<p>Développeur web en formation.</p>') ?></div>
             <div class="hero-actions">
+                <a class="btn-social btn-cv" href="<?= e($this->config['app']['base_url']) ?>/documents/cv.png" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-file-lines"></i> CV
+                </a>
                 <a class="btn-social btn-github" href="https://github.com/WAwa-92" target="_blank" rel="noopener">
                     <i class="fa-brands fa-github"></i> GitHub
                 </a>

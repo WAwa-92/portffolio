@@ -180,6 +180,19 @@ img {
     font-size: 1.1rem;
 }
 
+.btn-cv {
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    color: #fff;
+    border: 2px solid #10b981;
+}
+
+.btn-cv:hover {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+}
+
 .btn-github {
     background: #1a1a1a;
     color: #fff;
@@ -207,7 +220,7 @@ img {
     box-shadow: 0 10px 25px rgba(10, 102, 194, 0.45);
 }
 
-/* fallback for old .hero a */
+
 .hero a:not(.btn-social) {
     display: inline-block;
     background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
@@ -223,7 +236,6 @@ img {
     box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
 }
 
-/* Skills */
 .skills {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, transparent 100%);
     border: 2px solid var(--border);
