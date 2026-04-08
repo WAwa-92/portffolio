@@ -1,164 +1,96 @@
-# Portfolio VF (TP MVC PHP)
+# Portfolio — Wael Bakkay
 
-## Objectif du projet
+Portfolio personnel développé en PHP avec une architecture MVC maison, sans framework.
 
-Créer un portfolio avec :
+## Présentation
 
-- une page publique unique (présentation + compétences + projets)
-- une page détail d'un projet
-- une interface d'administration pour gérer les données
-- une architecture MVC orientée objet
-- les bases de sécurité web (auth, CSRF, SQL préparé, échappement XSS)
+Ce projet est un portfolio administrable qui permet de :
 
-## Avancement global
+- présenter mon profil, mes compétences et mes projets
+- gérer le contenu depuis un espace d'administration sécurisé
+- filtrer les projets par catégorie côté client en JavaScript
 
-- Partie 1 : terminée
-- Partie 2 : démarrée (module CRUD catégories terminé)
-- Partie 3 : à faire
+**Accès public :** `http://localhost/portfolioVF/public/`  
+**Accès admin :** `http://localhost/portfolioVF/public/login`  
+Email : `admin@portfolio.local` — Mot de passe : `password`
 
-## État actuel (code)
+---
 
-Ce dépôt contient la **partie 1** du TP :
+## Architecture MVC
 
-- architecture MVC en PHP orienté objet
-- routage (dont route dynamique) + page 404
-- authentification admin (session + CSRF + hash de mot de passe)
-- affichage public sur une seule page + détail projet
-- filtre JavaScript par catégorie sur l'accueil
-- structure SCSS mobile-first (base)
-- schéma SQL basé sur les diagrammes Merise
+```
+public/          → point d'entrée unique (index.php) + assets CSS/JS/images
+app/
+  Core/          → Router, Controller, Model, Session, Auth
+  Controllers/   → logique des pages (Home, Project, Auth, Admin)
+  Models/        → accès base de données via PDO
+  Views/         → templates PHP
+  Helpers/       → fonctions utilitaires (e(), rich())
+database/
+  schema.sql     → structure + données de départ
+diagrammes/      → modèles Merise (MCD, MLD, MPD)
+```
 
-### Partie 2 déjà faite
+Chaque requête arrive dans `public/index.php`, le Router lit l'URL et appelle le bon Controller, qui interroge le Model et passe les données à la View.
 
-- CRUD **admin catégories** complet
-   - liste
-   - création
-   - édition
-   - suppression (bloquée si projets liés)
-- validation serveur simple
-- try/catch sur opérations SQL
-- CSRF sur formulaires admin du module catégories
-- messages flash succès/erreur
+---
 
-## Structure
+## Base de données
 
-- public/ : point d'entrée web + assets
-- app/ : Core, Controllers, Models, Views
-- database/schema.sql : création + seed de la BDD
-- diagrammes/ : vos modèles Merise
+6 tables reliées par des clés étrangères :
 
-## Installation rapide (MAMP)
+| Table | Rôle |
+|---|---|
+| `users` | compte administrateur + profil public |
+| `categories` | catégories des projets (Frontend, Backend…) |
+| `projects` | projets avec titre, résumé, contenu riche |
+| `skills` | compétences avec niveau en % |
+| `tags` | technologies liées à un projet |
+| `images` | captures d'écran liées à un projet |
 
-3. Ouvrir dans le navigateur :
-   - http://localhost:8888/portfolioVF/public/
-4. Connexion admin :
-   - email: `admin@portfolio.local`
-   - mot de passe: `password`
+---
 
-## Routes principales
+## Fonctionnalités
 
-### Public
+### Côté public
+- Page d'accueil : présentation, photo, compétences avec jauges animées, projets avec filtres
+- Page détail projet : images, description, technologies utilisées
+- Boutons CV, GitHub, LinkedIn
+- Page 404 personnalisée
+- Responsive (mobile, tablette, desktop)
 
-- `/` accueil
-- `/project/{id}` détail projet
-- `/login` connexion admin
-- `/logout` déconnexion admin
+### Côté admin (accès protégé)
+- Connexion / déconnexion sécurisée
+- Dashboard avec statistiques
+- Gestion des catégories (liste, création, modification, suppression)
+- Édition du profil avec éditeur riche (Quill)
 
-### Admin
+---
 
-- `/admin` dashboard
-- `/admin/categories` liste catégories
-- `/admin/categories/create` formulaire création
-- `/admin/categories/{id}/edit` formulaire édition
+## Sécurité
 
-## Plan de la partie 2 (prochaines tâches)
+- Mots de passe hashés avec `password_hash` / `password_verify`
+- Sessions PHP pour l'authentification
+- Token CSRF sur tous les formulaires sensibles
+- Requêtes PDO préparées (protection injection SQL)
+- Échappement XSS via la fonction `e()`
 
-1. CRUD compétences
-2. CRUD projets (avec catégorie)
-3. CRUD tags
-4. CRUD images (upload sécurisé)
-5. CRUD profil utilisateur (avec éditeur riche Quill)
+---
 
-## Support de révision pour le diaporama
+## Technologies utilisées
 
-Tu peux reprendre ces blocs quasiment slide par slide.
+- PHP 8.5 (POO, namespaces, typage strict)
+- MySQL / PDO
+- HTML / CSS (dark theme responsive)
+- JavaScript vanilla (filtre projets)
+- Font Awesome (icônes)
+- Git / GitHub
 
-### 1) Présentation du projet / contexte
+---
 
-- Projet de portfolio personnel administrable
-- Public : recruteur / formateur
-- Objectif : démontrer MVC, POO, sécurité et responsive
+## Installation (MAMP)
 
-### 2) Merise
-
-- Entités principales : user, project, category, skill, tag, image
-- Relations :
-  - un projet appartient à une catégorie
-  - une catégorie possède plusieurs projets
-  - un projet possède plusieurs tags et images
-  - un utilisateur possède plusieurs compétences et projets
-
-### 3) Architecture MVC
-
-- `public/` : front controller
-- `app/Core` : Router, Controller, Model, Session, Auth
-- `app/Controllers` : logique HTTP
-- `app/Models` : accès données PDO + relations métier
-- `app/Views` : affichage
-
-### 4) Extrait POO à présenter
-
-- classes avec namespaces
-- typage strict (`declare(strict_types=1)`)
-- héritage (`Category extends Model`)
-- encapsulation (propriétés protégées / privées)
-- autoload via `spl_autoload_register`
-
-### 5) Authentification
-
-- login avec `password_verify`
-- session utilisateur (`auth_user_id`)
-- protection des routes admin
-
-### 6) 404
-
-- route non trouvée -> `ErrorController::notFound()`
-
-### 7) Gestion d'erreurs try/catch
-
-- utilisé sur les actions CRUD catégories (création / édition / suppression)
-
-### 8) Sécurité
-
-- requêtes préparées PDO
-- protection XSS avec `e()`
-- token CSRF sur formulaires sensibles
-- contrôle d'accès sur routes admin
-
-### 9) Éditeur riche
-
-- à intégrer en partie 2 (Quill) sur description utilisateur
-
-### 10) Démo à montrer
-
-- accueil + filtre JS
-- détail projet
-- login / logout
-- 404
-- CRUD admin catégories (déjà prêt)
-
-### 11) Version mobile
-
-- styles mobile-first (base en place)
-- montrer l'adaptation sur smartphone dans la démo
-
-### 12) Conclusion
-
-- points acquis : MVC, POO, sécurité de base
-- reste à finaliser : CRUD restants + Quill + polish UI
-
-## Découpage en 3 parties
-
-1. **Partie 1 (faite)** : socle technique MVC + sécurité de base + pages publiques.
-2. **Partie 2 (en cours)** : CRUD admin complet (compétences, projets, catégories, tags, images, profil + éditeur riche Quill).
-3. **Partie 3** : finitions (SCSS complet, responsive final, validations avancées, polish, préparation soutenance).
+1. Copier le projet dans `htdocs/portfolioVF/`
+2. Importer `database/schema.sql` dans phpMyAdmin
+3. Démarrer Apache et MySQL via MAMP
+4. Ouvrir `http://localhost/portfolioVF/public/`
