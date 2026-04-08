@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e(($pageTitle ?? '') . ' - ' . $this->config['app']['name']) ?></title>
-    <link rel="stylesheet" href="<?= e($this->config['app']['base_url']) ?>/assets/css/main.css">
+    <link rel="stylesheet" href="<?= e($this->config['app']['base_url']) ?>/assets/css/main.css?v=<?= time() ?>">
 </head>
 <body>
     <header class="site-header">
@@ -27,6 +27,12 @@
 
         <?= $content ?>
     </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <?= date('Y') ?> Portfolio - Tous droits réservés</p>
+        </div>
+    </footer>
 
     <script src="<?= e($this->config['app']['base_url']) ?>/assets/js/filter.js"></script>
 </body>
